@@ -40,6 +40,10 @@ footer{border-top:1px solid rgba(255,255,255,.06);margin-top:24px;}
 </head>
 <body>
 <header>
+   <audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+  Seu navegador não suporta o elemento de áudio.
+     </audio>
   <div class="nav container">
     <a class="brand" href="index.html">
     <img src="wplay.jpeg" alt="Minha Foto" class="minha-imagem">
@@ -107,11 +111,25 @@ footer{border-top:1px solid rgba(255,255,255,.06);margin-top:24px;}
 </div>
 </footer>
 
+    
+
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+  / Música de fundo
+const audio = document.getElementById('musica');
+audio.volume = 0.1; // volume baixo
+
+// Tenta autoplay, mas permite clique se bloqueado
+audio.play().catch(() => {
+  console.log('Autoplay bloqueado. Clique na página para ouvir.');
+  document.addEventListener('click', () => {
+    if(audio.paused) audio.play();
+  }, {once:true});
+});
 </script>
 </body>
 </html>
+
 
 
 
